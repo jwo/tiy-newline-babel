@@ -1,6 +1,8 @@
 FROM node
 
-RUN npm install --global babel-cli
+WORKDIR /tmp
+RUN npm install --save-dev babel-cli babel-preset-es2015
 
+RUN echo '{ "presets": ["es2015"] }' > .babelrc
 RUN touch /tmp/code
-CMD babel /tmp/code #--plugins=es2015,react
+CMD ./node_modules/.bin/babel /tmp/code
